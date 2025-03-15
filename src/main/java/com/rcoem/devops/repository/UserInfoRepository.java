@@ -4,10 +4,7 @@ import com.rcoem.devops.dto.UserInfo;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -38,5 +35,29 @@ public class UserInfoRepository {
     public UserInfo getUserById(String userId){
         return userInfoTable.get(userId);
     }
+
+    public void updateUserOrder(String userId, String orderId) {
+        UserInfo userInfo = userInfoTable.get(userId);
+        if (userInfo != null) {
+            // Ensure orders list is initialized
+            if (userInfo.getOrders() == null) {
+                userInfo.setOrders(new ArrayList<>());
+            }
+
+            // Add orderId if it's not already in the list
+            if (!userInfo.getOrders().contains(orderId)) {
+                userInfo.getOrders().add(orderId);
+            }
+
+            // Put the updated user info back into the map
+            userInfoTable.put(userId, userInfo);
+        }
+    }
+
+
+
+
+
+
 
 }

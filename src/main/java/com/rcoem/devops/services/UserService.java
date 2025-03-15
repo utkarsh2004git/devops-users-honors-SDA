@@ -3,7 +3,9 @@ package com.rcoem.devops.services;
 import com.rcoem.devops.dto.UserInfo;
 import com.rcoem.devops.repository.UserInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -12,6 +14,7 @@ public class UserService {
 
     @Autowired
     UserInfoRepository userInfoRepository;
+
 
     public List<UserInfo> getAllUsers(){
         return userInfoRepository.getAllUsers();
@@ -30,4 +33,8 @@ public class UserService {
         return userInfo;
     }
 
+    public void updateUserOrder(String userId, String orderId) {
+
+        userInfoRepository.updateUserOrder(userId,orderId);
+    }
 }

@@ -36,4 +36,16 @@ public class UserController {
         }
     }
 
+    @PutMapping("/{id}/{orderId}")
+    ResponseEntity<String> updateUser(@PathVariable String id, @PathVariable String orderId){
+
+
+        try{
+            userService.updateUserOrder(id, orderId);
+            return ResponseEntity.ok("User Order updated");
+        }catch(Exception e){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
